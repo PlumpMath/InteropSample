@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows;
 
 namespace InteropTest
@@ -8,18 +10,15 @@ namespace InteropTest
     /// </summary>
     public partial class MainWindow : Window
     {
-        public unsafe MainWindow()
+        public MainWindow()
         {
             InitializeComponent();
 
             UserTestData data = new UserTestData();
-            data.boolData = true;
+            data.stringData = "yes";
             data.charData = 'a';
             data.IntData = 10;
-
-            byte* addr = (byte*)&data;
-
-            Console.WriteLine("address: {0}", (byte*)&data.charData - addr);
+            
             NativeModule.Test(data);
         }
     }
